@@ -20,12 +20,7 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <Suspense fallback={""}>
-        {" "}
-        <HelmetProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </HelmetProvider>
+        <App />
       </Suspense>
     </React.StrictMode>
   </Provider>
