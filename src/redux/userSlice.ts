@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STR_TOKEN } from "../common";
+import { useAppSelector } from "./hooks";
 
 // Define a type for the slice state
 interface UserState {
@@ -32,6 +33,14 @@ export const UserSlice = createSlice({
     },
   },
 });
+
+export const useUser = (): UserState => {
+  const data = useAppSelector((state) => state.user);
+
+  return data;
+};
+
+// export const user = useAppSelector((state) => state.user);
 
 export const { setUser, signOut } = UserSlice.actions;
 

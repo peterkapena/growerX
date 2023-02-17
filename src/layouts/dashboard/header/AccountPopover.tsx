@@ -10,7 +10,9 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-import account from "../../../_mock/account";
+import { useUser } from "../../../redux/userSlice";
+import { signOut } from "../../../redux/userSlice";
+import { useAppDispatch } from "../../../redux/hooks";
 
 const MENU_OPTIONS = [
   {
@@ -29,14 +31,20 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const dispatch = useAppDispatch();
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
   };
+  const user = useUser();
 
   const handleClose = () => {
     setOpen(null);
   };
+
+  function logout() {
+    dispatch(signOut());
+  }
 
   return (
     <>
@@ -44,20 +52,16 @@ export default function AccountPopover() {
         onClick={handleOpen}
         sx={{
           p: 0,
-          ...(open && {
-            "&:before": {
-              zIndex: 1,
-              content: "''",
-              width: "100%",
-              height: "100%",
-              borderRadius: "50%",
-              position: "absolute",
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
-            },
-          }),
+          "&:before": {
+            zIndex: 1,
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            position: "absolute",
+          },
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar alt="photoURL" />
       </IconButton>
 
       <Popover
@@ -81,10 +85,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user.username}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {user.email}
           </Typography>
         </Box>
 
@@ -100,7 +104,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={logout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

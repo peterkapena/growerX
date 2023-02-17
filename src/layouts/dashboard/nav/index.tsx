@@ -6,7 +6,7 @@ import useResponsive from "../../../hooks/useResponsive";
 import Logo from "../../../components/logo";
 import Scrollbar from "../../../components/scrollbar";
 import NavSection from "../../../components/nav-section";
-import account from "../../../_mock/account";
+import { useUser } from "../../../redux/userSlice";
 
 const NAV_WIDTH = 250;
 
@@ -29,6 +29,7 @@ export default function Nav({ openNav, onCloseNav }: NavProps) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive("up", "lg");
+  const user = useUser();
 
   useEffect(() => {
     if (openNav) {
@@ -54,11 +55,11 @@ export default function Nav({ openNav, onCloseNav }: NavProps) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {account.displayName}
+                {user.username}
               </Typography>
             </Box>
           </StyledAccount>

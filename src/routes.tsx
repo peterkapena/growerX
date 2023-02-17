@@ -1,22 +1,16 @@
-import { createBrowserRouter, Navigate, useRoutes } from "react-router-dom";
-// layouts
-import DashboardLayout from "./layouts/dashboard";
-import SimpleLayout from "./layouts/simple";
-//
-import BlogPage from "./pages/BlogPage";
-import UserPage from "./pages/UserPage";
-import LoginPage from "./pages/LoginPage";
+import { createBrowserRouter } from "react-router-dom";
 import Page404 from "./pages/Page404";
 import ProductsPage from "./pages/ProductsPage";
 import DashboardAppPage from "./pages/DashboardAppPage";
 import { PAGES } from "./common";
-// ----------------------------------------------------------------------
+import Signin from "./pages/Signin";
+import Dashboard from "./layouts/dashboard/Dashboard";
 
 export const routes = createBrowserRouter([
   {
     errorElement: <Page404></Page404>,
     path: PAGES.HOME,
-    element: <DashboardLayout />,
+    element: <Dashboard />,
     children: [
       {
         path: PAGES.HOME,
@@ -30,7 +24,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: PAGES.SIGNIN,
-    element: <LoginPage />,
+    element: <Signin />,
   },
   // {
   //   path: PAGES.REGISTER,

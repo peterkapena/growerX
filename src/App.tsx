@@ -5,14 +5,17 @@ import { ThemeProvider } from "@emotion/react";
 // ----------------------------------------------------------------------
 import { routes } from "./routes";
 import { RouterProvider } from "react-router-dom";
-import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
+import { ApolloProvider } from "@apollo/client";
+import apollo from "./apollo";
 
 export default function App() {
   const themeState = useAppSelector((state) => state.theme);
   return (
     <ThemeProvider theme={theme(themeState.mode)}>
-      <StyledChart />
-      <RouterProvider router={routes} />
+      <ApolloProvider client={apollo}>
+        <StyledChart />
+        <RouterProvider router={routes} />
+      </ApolloProvider>
     </ThemeProvider>
   );
 }

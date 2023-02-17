@@ -5,10 +5,8 @@ import { styled } from "@mui/material/styles";
 //
 import Header from "./header";
 import Nav from "./nav";
-import { Container, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
-
-// ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -32,14 +30,12 @@ const Main = styled(Paper)(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
-
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
   return (
     <StyledRoot>
-     <ScrollToTop></ScrollToTop>
+      <ScrollToTop></ScrollToTop>
       <Header onOpenNav={() => setOpen(true)} />
 
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />
