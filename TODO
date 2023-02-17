@@ -1,6 +1,7 @@
-the navigation
+make the side navigation use the useNavigation istead of reloading the browser
 remove the search
 register
 sign in, sign out
+set user boxes
 side navbar menu
-the  2 user section
+the 2 user section

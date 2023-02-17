@@ -1,41 +1,17 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-// @mui
 import { styled, alpha } from "@mui/material/styles";
-import SvgColor from "../../../components/svg-color";
 import { toggleThemeMode } from "../../../redux/themeSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import {
-  Box,
-  Link,
-  Button,
-  Drawer,
-  Typography,
-  Avatar,
-  Stack,
-} from "@mui/material";
-// mock
-import account from "../../../_mock/account";
-// hooks
+import { useAppDispatch } from "../../../redux/hooks";
+import { Box, Link, Drawer, Typography, Avatar } from "@mui/material";
 import useResponsive from "../../../hooks/useResponsive";
-// components
 import Logo from "../../../components/logo";
 import Scrollbar from "../../../components/scrollbar";
-import NavSection, { NavItem } from "../../../components/nav-section/";
-//
-import navConfig from "./config";
+import NavSection, { NavItem } from "../../../components/nav-section";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import account from "../../../_mock/account";
 
-// ----------------------------------------------------------------------
-const icon = (name) => (
-  <SvgColor
-    src={`/assets/icons/navbar/${name}.svg`}
-    sx={{ width: 1, height: 1 }}
-  />
-);
-
-const NAV_WIDTH = 280;
+const NAV_WIDTH = 250;
 
 const StyledAccount = styled("div")(({ theme }) => ({
   display: "flex",
@@ -47,12 +23,12 @@ const StyledAccount = styled("div")(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-Nav.propTypes = {
-  openNav: PropTypes.bool,
-  onCloseNav: PropTypes.func,
+type NavProps = {
+  openNav: boolean;
+  onCloseNav: () => void;
 };
 
-export default function Nav({ openNav, onCloseNav }) {
+export default function Nav({ openNav, onCloseNav }: NavProps) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive("up", "lg");
@@ -62,7 +38,6 @@ export default function Nav({ openNav, onCloseNav }) {
     if (openNav) {
       onCloseNav();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const renderContent = (
@@ -89,25 +64,20 @@ export default function Nav({ openNav, onCloseNav }) {
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                 {account.displayName}
               </Typography>
-
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {account.role}
-              </Typography>
             </Box>
           </StyledAccount>
         </Link>
       </Box>
 
-      <NavSection data={navConfig} />
+      <NavSection />
 
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ p: 1 }}>
         <NavItem
-          item={{
-            title: "Dark/Light theme",
-            onClick: () => dispatch(toggleThemeMode()),
-            icon: <DarkModeIcon />,
-          }}
+          title={"Dark/Light theme"}
+          onClick={() => dispatch(toggleThemeMode())}
+          icon={<DarkModeIcon />}
+          path={""}
         />
       </Box>
 
