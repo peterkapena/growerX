@@ -1,18 +1,13 @@
-import PropTypes from "prop-types";
 import { NavLink as RouterLink } from "react-router-dom";
-// @mui
 import { Box, List, ListItemText } from "@mui/material";
-//
 import { StyledNavItem, StyledNavItemIcon } from "./styles";
-
 import { useNavigate } from "react-router-dom";
-// ----------------------------------------------------------------------
-import DangerousIcon from "@mui/icons-material/Dangerous";
 import { PAGES } from "../../common";
 import { ReactElement } from "react";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
+import StoreIcon from "@mui/icons-material/Store";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddIcon from "@mui/icons-material/Add";
 
 const menus: NavItemProps[] = [
   {
@@ -21,25 +16,16 @@ const menus: NavItemProps[] = [
     icon: <AnalyticsIcon />,
   },
   {
-    title: "product",
+    title: "Store",
     path: PAGES.PRODUCTS,
-    icon: <AddShoppingCartIcon />,
+    icon: <StoreIcon />,
   },
   {
-    title: "login",
-    path: PAGES.SIGNIN,
-    icon: <LockOpenIcon />,
-  },
-  {
-    title: "Not found",
-    path: PAGES.NOTFOUND,
-    icon: <DangerousIcon></DangerousIcon>,
+    title: "My Orders",
+    path: PAGES.ORDERS,
+    icon: <ShoppingCartIcon />,
   },
 ];
-
-type NavSectionProps = {
-  menus: NavItemProps[];
-};
 
 export default function NavSection() {
   const navigate = useNavigate();
@@ -58,11 +44,18 @@ export default function NavSection() {
           />
         ))}
       </List>
+
+      <Box sx={{ flexGrow: 1 }}>
+        <NavItem
+          icon={<AddIcon />}
+          title={"Add a product in store"}
+          path={PAGES.ADDPRODUCT}
+          onClick={() => navigate(PAGES.ADDPRODUCT)}
+        />
+      </Box>
     </Box>
   );
 }
-
-// ----------------------------------------------------------------------
 
 type NavItemProps = {
   title: string;
