@@ -1,1 +1,2 @@
-export { default } from './NavSection';
+export { default } from "./NavSection";
+export { NavItem } from "./NavSection";
