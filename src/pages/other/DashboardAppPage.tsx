@@ -1,37 +1,36 @@
-import { Helmet } from "react-helmet-async";
-import { faker } from "@faker-js/faker";
+// import { Helmet } from "react-helmet-async";
+// import { faker } from "@faker-js/faker";
 // @mui
 import { useTheme } from "@mui/material/styles";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 // components
-import Iconify from "../components/iconify";
-// sections
-import {
-  AppTasks,
-  AppNewsUpdate,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppWidgetSummary,
-  AppCurrentSubject,
-  AppConversionRates,
-} from "../sections/@dashboard/app";
+// import Iconify from "../components/iconify";
+// // sections
+// import {
+//   AppTasks,
+//   AppNewsUpdate,
+//   AppOrderTimeline,
+//   AppCurrentVisits,
+//   AppWebsiteVisits,
+//   AppTrafficBySite,
+//   AppWidgetSummary,
+//   AppCurrentSubject,
+//   AppConversionRates,
+// } from "../sections/@dashboard/app";
 
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage() {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   return (
     <>
-      <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
-        </Typography>
+      <Typography variant="h4" sx={{ mb: 5 }}>
+        Hi, Welcome back
+      </Typography>
 
-        <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary
               title="Weekly Sales"
@@ -261,8 +260,7 @@ export default function DashboardAppPage() {
               ]}
             />
           </Grid>
-        </Grid>
-      </Container>
+        </Grid> */}
     </>
   );
 }

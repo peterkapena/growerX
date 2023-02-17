@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-// @mui
 import { styled } from "@mui/material/styles";
-//
 import Header from "./header";
 import Nav from "./nav";
-import { Paper } from "@mui/material";
+import { Paper, Container } from "@mui/material";
 import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 
 const APP_BAR_MOBILE = 64;
@@ -41,7 +39,9 @@ export default function DashboardLayout() {
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />
 
       <Main>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </Main>
     </StyledRoot>
   );

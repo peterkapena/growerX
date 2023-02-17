@@ -1,6 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Stack, AppBar, Toolbar, IconButton } from "@mui/material";
-import Iconify from "../../../components/iconify";
+import { Box, Stack, AppBar, Toolbar, IconButton, Button } from "@mui/material";
 import Searchbar from "./Searchbar";
 import AccountPopover from "./AccountPopover";
 import ThemeToggle from "./ThemeToggle";
@@ -33,7 +32,7 @@ type HeaderProps = {
 
 export default function Header({ onOpenNav }: HeaderProps) {
   return (
-    <StyledRoot>
+    <StyledRoot color="transparent">
       <StyledToolbar>
         <IconButton
           onClick={onOpenNav}
@@ -48,7 +47,6 @@ export default function Header({ onOpenNav }: HeaderProps) {
 
         <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
-
         <Stack
           direction="row"
           alignItems="center"

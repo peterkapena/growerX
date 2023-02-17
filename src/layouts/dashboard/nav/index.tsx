@@ -18,8 +18,6 @@ const StyledAccount = styled("div")(({ theme }) => ({
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }));
 
-// ----------------------------------------------------------------------
-
 type NavProps = {
   openNav: boolean;
   onCloseNav: () => void;
@@ -56,7 +54,6 @@ export default function Nav({ openNav, onCloseNav }: NavProps) {
         <Link underline="none">
           <StyledAccount>
             <Avatar alt="photoURL" />
-
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
                 {user.username}

@@ -13,25 +13,31 @@ import {
 import { useUser } from "../../../redux/userSlice";
 import { signOut } from "../../../redux/userSlice";
 import { useAppDispatch } from "../../../redux/hooks";
+import { useNavigate } from "react-router-dom";
+import { PAGES } from "../../../common";
 
 const MENU_OPTIONS = [
   {
     label: "Home",
     icon: "eva:home-fill",
+    path: PAGES.HOME,
   },
-  {
-    label: "Profile",
-    icon: "eva:person-fill",
-  },
-  {
-    label: "Settings",
-    icon: "eva:settings-2-fill",
-  },
+  // {
+  //   label: "Profile",
+  //   icon: "eva:person-fill",
+  //   path: PAGES.PROFILE,
+  // },
+  // {
+  //   label: "Settings",
+  //   icon: "eva:settings-2-fill",
+  //   path: PAGES.SETTINGS,
+  // },
 ];
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -46,6 +52,10 @@ export default function AccountPopover() {
     dispatch(signOut());
   }
 
+  function onClick(path: string) {
+    navigate(path);
+    handleClose();
+  }
   return (
     <>
       <IconButton
@@ -96,7 +106,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem key={option.label} onClick={() => onClick(option.path)}>
               {option.label}
             </MenuItem>
           ))}

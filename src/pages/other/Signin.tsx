@@ -9,12 +9,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { FormikHelpers, useFormik } from "formik";
 import * as yup from "yup";
-import { IS_DEVELOPER, PAGES, STR_TOKEN, STR_USER } from "../common";
-import { gql } from "../__generated__";
+import { IS_DEVELOPER, PAGES, STR_TOKEN, STR_USER } from "../../common";
+import { gql } from "../../__generated__";
 import { useMutation } from "@apollo/client";
-import { SigninInput } from "../__generated__/graphql";
-import { FormSubmitting } from "../components/other/Submitting";
-import { AlertDialog } from "../components/other/Dialogs";
+import { SigninInput } from "../../__generated__/graphql";
+import { FormSubmitting } from "../../components/other/Submitting";
+import { AlertDialog } from "../../components/other/Dialogs";
 import { useState } from "react";
 
 const validationSchema = yup.object({
