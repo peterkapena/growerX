@@ -7,6 +7,7 @@ import Signin from "./pages/other/Signin";
 import Dashboard from "./layouts/dashboard/Dashboard";
 import Order from "./pages/order";
 import AddProduct from "./pages/product/AddProduct";
+import Register from "./pages/other/Register";
 
 export const routes = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ export const routes = createBrowserRouter([
     path: PAGES.SIGNIN,
     element: <Signin />,
   },
-  // {
-  //   path: PAGES.REGISTER,
-  //   element: <Register />,
-  // },
+  {
+    path: PAGES.REGISTER,
+    element: <Register />,
+  },
 ]);

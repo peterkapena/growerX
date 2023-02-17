@@ -1,28 +1,23 @@
-import { useState } from "react";
-// @mui
-import { Container, Stack, Typography } from "@mui/material";
-// components
+// import { useState } from "react";
+import { Typography } from "@mui/material";
 import {
-  ProductSort,
+  // ProductSort,
   ProductList,
-  ProductCartWidget,
-  ProductFilterSidebar,
+  // ProductCartWidget,
+  // ProductFilterSidebar,
 } from "../../sections/@dashboard/products";
-// mock
 import PRODUCTS from "../../_mock/products";
 
-// ----------------------------------------------------------------------
-
 export default function ProductsPage() {
-  const [openFilter, setOpenFilter] = useState(false);
+  // const [openFilter, setOpenFilter] = useState(false);
 
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
+  // const handleOpenFilter = () => {
+  //   setOpenFilter(true);
+  // };
 
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
+  // const handleCloseFilter = () => {
+  //   setOpenFilter(false);
+  // };
 
   return (
     <>
@@ -30,7 +25,7 @@ export default function ProductsPage() {
         Products
       </Typography>
 
-      <Stack
+      {/* <Stack
         direction="row"
         flexWrap="wrap-reverse"
         alignItems="center"
@@ -45,10 +40,10 @@ export default function ProductsPage() {
           />
           <ProductSort />
         </Stack>
-      </Stack>
+      </Stack> */}
 
       <ProductList products={PRODUCTS} />
-      <ProductCartWidget />
+      {/* <ProductCartWidget /> */}
     </>
   );
 }

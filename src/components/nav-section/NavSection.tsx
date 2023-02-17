@@ -8,6 +8,7 @@ import AnalyticsIcon from "@mui/icons-material/Analytics";
 import StoreIcon from "@mui/icons-material/Store";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const menus: NavItemProps[] = [
   {
@@ -53,6 +54,12 @@ export default function NavSection() {
           onClick={() => navigate(PAGES.ADDPRODUCT)}
         />
       </Box>
+      <NavItem
+        icon={<AppRegistrationIcon />}
+        title={"REGISTER"}
+        path={PAGES.REGISTER}
+        onClick={() => navigate(PAGES.REGISTER)}
+      />
     </Box>
   );
 }
