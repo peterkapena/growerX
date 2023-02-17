@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import Header from "./header";
 import Nav from "./nav";
 import { Container, Paper } from "@mui/material";
+import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,7 @@ export default function DashboardLayout() {
 
   return (
     <StyledRoot>
+     <ScrollToTop></ScrollToTop>
       <Header onOpenNav={() => setOpen(true)} />
 
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />
