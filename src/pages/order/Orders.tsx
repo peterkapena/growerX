@@ -1,7 +1,7 @@
 import { Chip, Typography } from "@mui/material";
 import Order from "../../components/order/";
 import DataTable from "../../components/other/DataTable";
-import CustomTabs, { CustomTabPanelProps } from "./Tabs";
+import CustomTabs, { CustomTabPanelProps } from "../../components/Tab/Tabs";
 
 const statuses = ["Requested", "Completed", "Cancelled"];
 
@@ -95,7 +95,9 @@ const orders = [
 export default function Orders() {
   return (
     <div>
-      <Typography variant="h5">Orders</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        Orders
+      </Typography>
       <CustomTabs tabs={tabs}></CustomTabs>
     </div>
   );

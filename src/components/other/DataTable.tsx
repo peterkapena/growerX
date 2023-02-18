@@ -3,6 +3,7 @@ import {
   GridColDef,
   GridColumnHeaderParams,
   GridColumnVisibilityModel,
+  GridEventListener,
   GridRowsProp,
   GridValidRowModel,
 } from "@mui/x-data-grid";
@@ -14,6 +15,7 @@ export type DataTableProps<R extends GridValidRowModel> = {
   checkboxSelection?: boolean;
   columnVisibilityModel?: GridColumnVisibilityModel;
   disableColumnMenu?: boolean;
+  onRowClick?: GridEventListener<"rowClick"> | undefined;
 };
 
 export default function DataTable<R extends GridValidRowModel>(
@@ -25,16 +27,11 @@ export default function DataTable<R extends GridValidRowModel>(
     checkboxSelection,
     columnVisibilityModel,
     disableColumnMenu,
+    onRowClick,
   } = props;
   return (
     <div style={{ display: "flex" }}>
       <DataGrid
-        sx={{
-          "& .super-app-theme--rows": {
-            cursor: "pointer",
-          },
-        }}
-        disableSelectionOnClick
         disableColumnMenu={disableColumnMenu}
         autoHeight
         rows={rows}
@@ -49,15 +46,13 @@ export default function DataTable<R extends GridValidRowModel>(
             </Paper>
           ),
         }))}
-        getRowHeight={() => "auto"}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection={checkboxSelection}
         columnVisibilityModel={columnVisibilityModel}
         autoPageSize
         density="compact"
-        isRowSelectable={(_) => false}
-        getRowClassName={() => `super-app-theme--rows`}
+        onRowClick={onRowClick}
       />
     </div>
   );

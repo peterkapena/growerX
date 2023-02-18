@@ -36,6 +36,7 @@ function a11yProps(index: number) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+
 export type CustomTabPanelProps = {
   label: string;
   element: React.ReactNode;

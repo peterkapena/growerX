@@ -16,7 +16,7 @@ import {
   AddProductFormValueModel,
   addProductFormModel,
 } from "./addProductFormModel";
-import Loading from "../../components/other/Laoding";
+import Loading from "../../components/other/Loading";
 import { MenuItem } from "@mui/material";
 import { AddProductSchemaInput } from "../../__generated__/graphql";
 
@@ -149,7 +149,7 @@ export default function AddProduct() {
           <AlertDialog
             title={"Please note"}
             message={"The product has been added."}
-            onClose={() => navigate(PAGES.PRODUCTS)}
+            onClose={() => navigate(PAGES.STORE)}
           ></AlertDialog>
         )}
       </Grid>

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Page404 from "./pages/other/Page404";
-import ProductsPage from "./pages/other/ProductsPage";
+import Store from "./pages/other/Store";
 import DashboardAppPage from "./pages/other/DashboardAppPage";
 import { PAGES } from "./common";
 import Signin from "./pages/other/Signin";
@@ -8,6 +8,7 @@ import Dashboard from "./layouts/dashboard/Dashboard";
 import Order from "./pages/order";
 import AddProduct from "./pages/product/AddProduct";
 import Register from "./pages/other/Register";
+import Products from "./pages/other/Products";
 
 export const routes = createBrowserRouter([
   {
@@ -24,12 +25,16 @@ export const routes = createBrowserRouter([
         element: <AddProduct></AddProduct>,
       },
       {
-        path: PAGES.PRODUCTS,
-        element: <ProductsPage />,
+        path: PAGES.STORE,
+        element: <Store />,
       },
       {
         path: PAGES.ORDERS,
         element: <Order />,
+      },
+      {
+        path: PAGES.PRODUCTS,
+        element: <Products />,
       },
     ],
   },

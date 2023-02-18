@@ -18,10 +18,11 @@ export const PAGES = {
   REGISTER: "/register",
   // ADDUSER: "/addsr",
   ADDPRODUCT: "/addproduct",
-  PRODUCTS: "/store",
+  STORE: "/store",
   ORDERS: "/orders",
   NOTFOUND: "/404",
   SETTINGS: "/settings",
+  PRODUCTS: "/products",
 };
 
 export function getRandomInt(min: number, max: number) {
