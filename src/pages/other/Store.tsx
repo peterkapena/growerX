@@ -1,5 +1,16 @@
 import { gql, useQuery } from "@apollo/client";
-import { Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Chip,
+  Divider,
+  Grid,
+  List,
+  Typography,
+} from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import DataTable from "../../components/other/DataTable";
 import Loading from "../../components/other/Loading";
@@ -7,6 +18,8 @@ import { useUser } from "../../redux/userSlice";
 import { GetProductsByOrganisationQuery } from "../../__generated__/graphql";
 import { useNavigate } from "react-router-dom";
 import { PAGES } from "../../common";
+import { EditOutlined, HouseOutlined } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
 
 const columns: GridColDef[] = [
   {
@@ -43,15 +56,35 @@ export default function Store() {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Store
-      </Typography>
-      <DataTable
-        disableColumnMenu
-        rows={rows(data)}
-        columns={columns}
-        onRowClick={(param) => navigate(PAGES.PRODUCT + "/" + param.row.id)}
-      ></DataTable>
+      <Card>
+        <CardHeader
+          title={
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                borderRadius: 1,
+              }}
+            >
+              <Button
+                endIcon={<AddIcon />}
+                variant="outlined"
+                onClick={() => navigate(PAGES.PRODUCT)}
+              >
+                Add a product to the store
+              </Button>
+            </Box>
+          }
+        ></CardHeader>
+        <CardContent>
+          <DataTable
+            disableColumnMenu
+            rows={rows(data)}
+            columns={columns}
+            onRowClick={(param) => navigate(PAGES.PRODUCT + "/" + param.row.id)}
+          ></DataTable>
+        </CardContent>
+      </Card>
     </>
   );
 }
