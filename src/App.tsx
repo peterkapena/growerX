@@ -1,4 +1,3 @@
-import { StyledChart } from "./components/chart";
 import { useAppSelector } from "./redux/hooks";
 import { theme } from "./redux/themeSlice";
 import { ThemeProvider } from "@emotion/react";
@@ -13,7 +12,6 @@ export default function App() {
   return (
     <ThemeProvider theme={theme(themeState.mode)}>
       <ApolloProvider client={apollo}>
-        <StyledChart />
         <RouterProvider router={routes} />
       </ApolloProvider>
     </ThemeProvider>
