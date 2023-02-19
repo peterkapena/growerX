@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { FormikHelpers, useFormik } from "formik";
-import { PAGES } from "../../common";
-import { useQuery } from "@apollo/client";
+import { IS_DEVELOPER, PAGES } from "../../common";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { FormSubmitting } from "../../components/other/Submitting";
 import { AlertDialog } from "../../components/other/Dialogs";
 import { useState } from "react";
@@ -13,15 +13,24 @@ import {
   productEditFormInitialValues,
   productEditFormValidationSchema,
   ProductEditFormValueModel,
-  productEditFormModel
+  productEditFormModel,
 } from "./productEditFormModel";
 import { MenuItem } from "@mui/material";
-import { GetProductsSchema } from "../../__generated__/graphql";
+import {
+  AddProductSchemaInput,
+  GetProductsSchema,
+} from "../../__generated__/graphql";
 import { GET_FLAGS_PRODUCTS_TYPE } from "./ProductEdit";
 
 type ProductEdit1Props = {
   data: GetProductsSchema;
 };
+
+const EditProduct = gql(`
+mutation EditProduct($input: AddProductSchemaInput!, $id: String!) {
+  editProduct(input: $input, id: $id)
+}
+`);
 
 export function ProductEditForm({ data }: ProductEdit1Props) {
   const [error, setError] = useState(false);
@@ -40,27 +49,30 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
     onSubmit: _handleSubmit,
   });
 
+  const [editProduct] = useMutation(EditProduct, {
+    refetchQueries: ["GetProductsByOrganisation"],
+  });
+
   async function _handleSubmit(
     values: ProductEditFormValueModel,
     actions: FormikHelpers<any>
   ) {
-    alert(values)
-    // actions.setSubmitting(true);
-    // try {
-    //   if (formik.isValid) {
-    //     const input: AddProductSchemaInput = {
-    //       flgProductType: values.flgProductType,
-    //       quantity: +values.quantity,
-    //     };
-    //     const rtn = (await addProduct({ variables: { input } })).data
-    //       ?.addProduct;
-    //     if (IS_DEVELOPER) console.log(rtn);
-    //     setSuccess(Boolean(rtn?._id));
-    //   }
-    // } catch (e) {
-    //   setError(true);
-    //   if (IS_DEVELOPER) console.log(JSON.stringify(e));
-    // }
+    actions.setSubmitting(true);
+    try {
+      if (formik.isValid) {
+        const input: AddProductSchemaInput = {
+          flgProductType: values.flgProductType,
+          quantity: +values.quantity,
+        };
+        const rtn = (await editProduct({ variables: { input, id: data._id } }))
+          .data.editProduct;
+        if (IS_DEVELOPER) console.log(rtn);
+        setSuccess(Boolean(rtn));
+      }
+    } catch (e) {
+      setError(true);
+      if (IS_DEVELOPER) console.log(JSON.stringify(e));
+    }
     actions.setSubmitting(false);
   }
   return (
@@ -78,9 +90,13 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
             select
             disabled
             id={formFields.flgProductType.name}
-            error={formik.touched.flgProductType &&
-              Boolean(formik.errors.flgProductType)}
-            helperText={formik.touched.flgProductType && formik.errors.flgProductType}
+            error={
+              formik.touched.flgProductType &&
+              Boolean(formik.errors.flgProductType)
+            }
+            helperText={
+              formik.touched.flgProductType && formik.errors.flgProductType
+            }
             {...formik.getFieldProps(formFields.flgProductType.name)}
           >
             {GetFlagsProductTypeQuery.data?.getFlagsByType?.map((option) => (
@@ -99,7 +115,8 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
             margin="normal"
             error={formik.touched.quantity && Boolean(formik.errors.quantity)}
             helperText={formik.touched.quantity && formik.errors.quantity}
-            {...formik.getFieldProps(formFields.quantity.name)} />
+            {...formik.getFieldProps(formFields.quantity.name)}
+          />
 
           <Button
             color="primary"
@@ -122,7 +139,7 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
         {success && (
           <AlertDialog
             title={"Please note"}
-            message={"The product has been added."}
+            message={"Edit succeeded."}
             onClose={() => navigate(PAGES.STORE)}
           ></AlertDialog>
         )}

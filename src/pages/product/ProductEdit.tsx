@@ -20,6 +20,7 @@ query GetFlagsByType($input: Float!) {
 const GetProduct = gql(`
 query GetProduct($input: String!) {
   getProduct(input: $input) {
+    _id
     quantity
     type
     name
