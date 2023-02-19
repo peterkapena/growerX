@@ -10,7 +10,7 @@ import { useUser } from "../../../redux/userSlice";
 
 const NAV_WIDTH = 250;
 
-const StyledAccount = styled("div")(({ theme }) => ({
+const StyledAccount = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(2, 2.5),
@@ -50,18 +50,12 @@ export default function Nav({ openNav, onCloseNav }: NavProps) {
         <Logo />
       </Box>
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none">
-          <StyledAccount>
-            <Avatar alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {user.username}
-              </Typography>
-            </Box>
-          </StyledAccount>
-        </Link>
-      </Box>
+      <StyledAccount>
+        <Avatar alt="photoURL" />
+        <Typography marginLeft={1} variant="subtitle2" noWrap>
+          {user.username}
+        </Typography>
+      </StyledAccount>
 
       <NavSection />
 
