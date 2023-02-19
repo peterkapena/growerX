@@ -3,94 +3,72 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { FormikHelpers, useFormik } from "formik";
-import { IS_DEVELOPER, PAGES } from "../../common";
-import { gql } from "../../__generated__";
-import { useMutation, useQuery } from "@apollo/client";
+import { PAGES } from "../../common";
+import { useQuery } from "@apollo/client";
 import { FormSubmitting } from "../../components/other/Submitting";
 import { AlertDialog } from "../../components/other/Dialogs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  addProductFormInitialValues,
-  addProductFormValidationSchema,
-  AddProductFormValueModel,
-  addProductFormModel,
-} from "./addProductFormModel";
-import Loading from "../../components/other/Loading";
+  productEditFormInitialValues,
+  productEditFormValidationSchema,
+  ProductEditFormValueModel,
+  productEditFormModel
+} from "./productEditFormModel";
 import { MenuItem } from "@mui/material";
-import { AddProductSchemaInput } from "../../__generated__/graphql";
+import { GetProductsSchema } from "../../__generated__/graphql";
+import { GET_FLAGS_PRODUCTS_TYPE } from "./ProductEdit";
 
-const GET_FLAGS_PRODUCTS_TYPE = gql(`
-query GetFlagsByType($input: Float!) {
-    getFlagsByType(input: $input) {
-      description
-      _id
-    }
-  }
-`);
-const ADD_PRODUCT = gql(`
-mutation AddProduct($input: AddProductSchemaInput!) {
-    addProduct(input: $input) {
-      quantity
-      organisationId
-      flgProductType
-      _id
-    }
-  }
-`);
+type ProductEdit1Props = {
+  data: GetProductsSchema;
+};
 
-export default function AddProduct() {
+export function ProductEditForm({ data }: ProductEdit1Props) {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
-  const { formFields, formId } = addProductFormModel;
+  const { formFields, formId } = productEditFormModel;
 
-  const formik = useFormik<AddProductFormValueModel>({
-    initialValues: addProductFormInitialValues,
-    validationSchema: addProductFormValidationSchema,
+  const GetFlagsProductTypeQuery = useQuery(GET_FLAGS_PRODUCTS_TYPE, {
+    variables: { input: 3 },
+  });
+
+  const formik = useFormik<ProductEditFormValueModel>({
+    initialValues: productEditFormInitialValues(data),
+    validationSchema: productEditFormValidationSchema,
     onSubmit: _handleSubmit,
   });
 
-  const { data, loading } = useQuery(GET_FLAGS_PRODUCTS_TYPE, {
-    variables: { input: 3 },
-  });
-  const [addProduct] = useMutation(ADD_PRODUCT, {
-    refetchQueries: ["GetProducts"],
-  });
-  const navigate = useNavigate();
-
   async function _handleSubmit(
-    values: AddProductFormValueModel,
+    values: ProductEditFormValueModel,
     actions: FormikHelpers<any>
   ) {
-    actions.setSubmitting(true);
-
-    try {
-      if (formik.isValid) {
-        const input: AddProductSchemaInput = {
-          flgProductType: values.flgProductType,
-          quantity: +values.quantity,
-        };
-
-        const rtn = (await addProduct({ variables: { input } })).data
-          ?.addProduct;
-
-        if (IS_DEVELOPER) console.log(rtn);
-        setSuccess(Boolean(rtn?._id));
-      }
-    } catch (e) {
-      setError(true);
-      if (IS_DEVELOPER) console.log(JSON.stringify(e));
-    }
+    alert(values)
+    // actions.setSubmitting(true);
+    // try {
+    //   if (formik.isValid) {
+    //     const input: AddProductSchemaInput = {
+    //       flgProductType: values.flgProductType,
+    //       quantity: +values.quantity,
+    //     };
+    //     const rtn = (await addProduct({ variables: { input } })).data
+    //       ?.addProduct;
+    //     if (IS_DEVELOPER) console.log(rtn);
+    //     setSuccess(Boolean(rtn?._id));
+    //   }
+    // } catch (e) {
+    //   setError(true);
+    //   if (IS_DEVELOPER) console.log(JSON.stringify(e));
+    // }
     actions.setSubmitting(false);
   }
-
-  if (loading) return <Loading></Loading>;
-
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid item>
-        <Typography variant="h4">Add a product to your store</Typography>
+        <Typography variant="h4" sx={{ mb: 2 }}>
+          Editing {data.name}
+        </Typography>
         <form id={formId} onSubmit={formik.handleSubmit}>
           <TextField
             label={formFields.flgProductType.label}
@@ -98,17 +76,14 @@ export default function AddProduct() {
             margin="normal"
             size="small"
             select
+            disabled
             id={formFields.flgProductType.name}
-            error={
-              formik.touched.flgProductType &&
-              Boolean(formik.errors.flgProductType)
-            }
-            helperText={
-              formik.touched.flgProductType && formik.errors.flgProductType
-            }
+            error={formik.touched.flgProductType &&
+              Boolean(formik.errors.flgProductType)}
+            helperText={formik.touched.flgProductType && formik.errors.flgProductType}
             {...formik.getFieldProps(formFields.flgProductType.name)}
           >
-            {data?.getFlagsByType?.map((option) => (
+            {GetFlagsProductTypeQuery.data?.getFlagsByType?.map((option) => (
               <MenuItem key={option._id} value={option._id}>
                 {option.description}
               </MenuItem>
@@ -124,8 +99,7 @@ export default function AddProduct() {
             margin="normal"
             error={formik.touched.quantity && Boolean(formik.errors.quantity)}
             helperText={formik.touched.quantity && formik.errors.quantity}
-            {...formik.getFieldProps(formFields.quantity.name)}
-          />
+            {...formik.getFieldProps(formFields.quantity.name)} />
 
           <Button
             color="primary"
@@ -155,8 +129,4 @@ export default function AddProduct() {
       </Grid>
     </Grid>
   );
-}
-
-export function AddProductMenus() {
-  return <></>;
 }

@@ -19,6 +19,7 @@ const documents = {
     "\nmutation Signin($input: SigninInput!) {\n  signin(input: $input) {\n    username\n    token\n    email\n    surName\n    givenName\n    message\n  }\n}\n": types.SigninDocument,
     "\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    quantity     \n    name\n    _id\n  }\n}\n": types.GetProductsByOrganisationDocument,
     "\nmutation AddProduct($input: AddProductSchemaInput!) {\n    addProduct(input: $input) {\n      quantity\n      organisationId\n      flgProductType\n      _id\n    }\n  }\n": types.AddProductDocument,
+    "\nquery GetProduct($input: String!) {\n  getProduct(input: $input) {\n    quantity\n    type\n    name\n  }\n}\n": types.GetProductDocument,
 };
 
 /**
@@ -59,6 +60,10 @@ export function gql(source: "\nquery GetProductsByOrganisation($input: String!) 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nmutation AddProduct($input: AddProductSchemaInput!) {\n    addProduct(input: $input) {\n      quantity\n      organisationId\n      flgProductType\n      _id\n    }\n  }\n"): (typeof documents)["\nmutation AddProduct($input: AddProductSchemaInput!) {\n    addProduct(input: $input) {\n      quantity\n      organisationId\n      flgProductType\n      _id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery GetProduct($input: String!) {\n  getProduct(input: $input) {\n    quantity\n    type\n    name\n  }\n}\n"): (typeof documents)["\nquery GetProduct($input: String!) {\n  getProduct(input: $input) {\n    quantity\n    type\n    name\n  }\n}\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

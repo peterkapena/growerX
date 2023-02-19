@@ -23,6 +23,7 @@ export const PAGES = {
   NOTFOUND: "/404",
   SETTINGS: "/settings",
   PRODUCTS: "/products",
+  PRODUCT: "/product",
 };
 
 export function getRandomInt(min: number, max: number) {

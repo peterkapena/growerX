@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import Products from "../../pages/other/Products";
-import StorefrontIcon from '@mui/icons-material/Storefront';
+import StorefrontIcon from "@mui/icons-material/Storefront";
 
 const menus: NavItemProps[] = [
   {
@@ -57,8 +57,8 @@ export default function NavSection() {
         <NavItem
           icon={<AddIcon />}
           title={"Add a product in store"}
-          path={PAGES.ADDPRODUCT}
-          onClick={() => navigate(PAGES.ADDPRODUCT)}
+          path={PAGES.PRODUCT}
+          onClick={() => navigate(PAGES.PRODUCT)}
         />
       </Box>
       <NavItem

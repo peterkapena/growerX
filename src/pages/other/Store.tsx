@@ -5,57 +5,8 @@ import DataTable from "../../components/other/DataTable";
 import Loading from "../../components/other/Loading";
 import { useUser } from "../../redux/userSlice";
 import { GetProductsByOrganisationQuery } from "../../__generated__/graphql";
-
-const products = [
-  {
-    _id: 111,
-    name: "Maize",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 22,
-    name: "Beanse",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 33,
-    name: "Spinnach",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    id: 44,
-    name: "Bananas",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 55,
-    name: "Oranges",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 66,
-    name: "Potatoes",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 1411,
-    name: "Apples",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-  {
-    _id: 222,
-    name: "Lemon",
-    quantity: 1212,
-    unitPrice: 0.44,
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { PAGES } from "../../common";
 
 const columns: GridColDef[] = [
   {
@@ -86,6 +37,8 @@ export default function Store() {
   const { data, loading } = useQuery(GetProductsByOrganisation, {
     variables: { input: user.organisationId },
   });
+  const navigate = useNavigate();
+
   if (loading) return <Loading></Loading>;
 
   return (
@@ -97,7 +50,7 @@ export default function Store() {
         disableColumnMenu
         rows={rows(data)}
         columns={columns}
-        onRowClick={(param)=>console.log(param)}
+        onRowClick={(param) => navigate(PAGES.PRODUCT + "/" + param.row.id)}
       ></DataTable>
     </>
   );

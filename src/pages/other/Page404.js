@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 // @mui
 import { styled } from "@mui/material/styles";
 import { Button, Typography, Container, Box } from "@mui/material";
@@ -19,6 +19,7 @@ const StyledContent = styled("div")(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Page404() {
+  const navigate = useNavigate();
   return (
     <>
       <Container>
@@ -26,7 +27,9 @@ export default function Page404() {
           <Typography variant="h3" paragraph>
             Sorry, page not found!
           </Typography>
-
+          <Button onClick={() => navigate(-1)} size="large" variant="contained">
+            Go back
+          </Button>
           <Typography sx={{ color: "text.secondary" }}>
             Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
             mistyped the URL? Be sure to check your spelling.
@@ -37,15 +40,6 @@ export default function Page404() {
             src="/assets/illustrations/illustration_404.svg"
             sx={{ height: 260, mx: "auto", my: { xs: 5, sm: 10 } }}
           />
-
-          <Button
-            to="/"
-            size="large"
-            variant="contained"
-            component={RouterLink}
-          >
-            Go to Home
-          </Button>
         </StyledContent>
       </Container>
     </>

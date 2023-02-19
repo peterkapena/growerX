@@ -6,9 +6,10 @@ import { PAGES } from "./common";
 import Signin from "./pages/other/Signin";
 import Dashboard from "./layouts/dashboard/Dashboard";
 import Order from "./pages/order";
-import AddProduct from "./pages/product/AddProduct";
+import Product from "./pages/product/Product";
 import Register from "./pages/other/Register";
 import Products from "./pages/other/Products";
+import ProductEdit from "./pages/product/ProductEdit";
 
 export const routes = createBrowserRouter([
   {
@@ -21,8 +22,8 @@ export const routes = createBrowserRouter([
         element: <DashboardAppPage></DashboardAppPage>,
       },
       {
-        path: PAGES.ADDPRODUCT,
-        element: <AddProduct></AddProduct>,
+        path: PAGES.PRODUCT,
+        element: <Product></Product>,
       },
       {
         path: PAGES.STORE,
@@ -31,6 +32,10 @@ export const routes = createBrowserRouter([
       {
         path: PAGES.ORDERS,
         element: <Order />,
+      },
+      {
+        path: PAGES.PRODUCT + "/:productId",
+        element: <ProductEdit />,
       },
       {
         path: PAGES.PRODUCTS,
