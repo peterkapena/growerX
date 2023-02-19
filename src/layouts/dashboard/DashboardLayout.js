@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import Header from "./header";
-import Nav from "./nav";
+import Header from "../header";
+import Nav from "./../nav";
 import { Paper, Container } from "@mui/material";
 import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 

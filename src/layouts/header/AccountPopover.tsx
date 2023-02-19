@@ -10,11 +10,11 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-import { useUser } from "../../../redux/userSlice";
-import { signOut } from "../../../redux/userSlice";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useUser } from "../../redux/userSlice";
+import { signOut } from "../../redux/userSlice";
+import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
-import { PAGES } from "../../../common";
+import { PAGES } from "../../common";
 
 const MENU_OPTIONS = [
   {

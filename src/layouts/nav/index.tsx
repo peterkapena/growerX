@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import { Box, Link, Drawer, Typography, Avatar } from "@mui/material";
-import useResponsive from "../../../hooks/useResponsive";
-import Logo from "../../../components/logo";
-import Scrollbar from "../../../components/scrollbar";
-import NavSection from "../../../components/nav-section";
-import { useUser } from "../../../redux/userSlice";
+import useResponsive from "../../hooks/useResponsive";
+import Logo from "../../components/logo";
+import Scrollbar from "../../components/scrollbar";
+import NavSection from "../../components/nav-section";
+import { useUser } from "../../redux/userSlice";
 
 const NAV_WIDTH = 250;
 
