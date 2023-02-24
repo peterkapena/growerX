@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import { FormikHelpers, useFormik } from "formik";
 import { IS_DEVELOPER, PAGES } from "../../common";
 import { gql } from "../../__generated__";
@@ -119,7 +118,7 @@ export default function Product() {
 
           <TextField
             id={formFields.quantity.name}
-            type="text"
+            type="number"
             fullWidth
             label={formFields.quantity.label}
             size="small"
@@ -129,6 +128,17 @@ export default function Product() {
             {...formik.getFieldProps(formFields.quantity.name)}
           />
 
+          <TextField
+            id={formFields.unitPrice.name}
+            type="number"
+            fullWidth
+            label={formFields.unitPrice.label}
+            size="small"
+            margin="normal"
+            error={formik.touched.unitPrice && Boolean(formik.errors.unitPrice)}
+            helperText={formik.touched.unitPrice && formik.errors.unitPrice}
+            {...formik.getFieldProps(formFields.unitPrice.name)}
+          />
           <Button
             color="primary"
             variant="contained"
