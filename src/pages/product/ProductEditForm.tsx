@@ -21,6 +21,7 @@ import {
   GetProductsSchema,
 } from "../../__generated__/graphql";
 import { GET_FLAGS_PRODUCTS_TYPE } from "./ProductEdit";
+import PageLabel from "../../components/labels/PageLabel";
 
 type ProductEdit1Props = {
   data: GetProductsSchema;
@@ -63,6 +64,7 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
         const input: AddProductSchemaInput = {
           flgProductType: values.flgProductType,
           quantity: +values.quantity,
+          unitPrice: +values.unitPrice,
         };
         const rtn = (await editProduct({ variables: { input, id: data._id } }))
           .data.editProduct;
@@ -78,9 +80,7 @@ export function ProductEditForm({ data }: ProductEdit1Props) {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid item>
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          Editing {data.name}
-        </Typography>
+        <PageLabel>Editing {data.name}</PageLabel>
         <form id={formId} onSubmit={formik.handleSubmit}>
           <TextField
             label={formFields.flgProductType.label}

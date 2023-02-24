@@ -71,6 +71,7 @@ export default function Product() {
         const input: AddProductSchemaInput = {
           flgProductType: values.flgProductType,
           quantity: +values.quantity,
+          unitPrice: +values.unitPrice,
         };
 
         const rtn = (await addProduct({ variables: { input } })).data
@@ -91,7 +92,6 @@ export default function Product() {
   return (
     <Grid width={500} container component="main" sx={{ height: "100vh" }}>
       <Grid item>
-        
         <PageLabel>Add a product to your store</PageLabel>
         <form id={formId} onSubmit={formik.handleSubmit}>
           <TextField
