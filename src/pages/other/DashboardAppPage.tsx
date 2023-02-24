@@ -4,6 +4,7 @@
 import { useTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import PageLabel from "../../components/labels/PageLabel";
 // components
 // import Iconify from "../components/iconify";
 // // sections
@@ -26,9 +27,7 @@ export default function DashboardAppPage() {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back
-      </Typography>
+      <PageLabel>Hi, Welcome back</PageLabel>
 
       {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>

@@ -5,10 +5,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Chip,
-  Divider,
-  Grid,
-  List,
   Typography,
 } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
@@ -18,8 +14,8 @@ import { useUser } from "../../redux/userSlice";
 import { GetProductsByOrganisationQuery } from "../../__generated__/graphql";
 import { useNavigate } from "react-router-dom";
 import { PAGES } from "../../common";
-import { EditOutlined, HouseOutlined } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
+import PageLabel from "../../components/labels/PageLabel";
 
 const columns: GridColDef[] = [
   {
@@ -56,6 +52,7 @@ export default function Store() {
 
   return (
     <>
+      <PageLabel>Store</PageLabel>
       <Card>
         <CardHeader
           title={

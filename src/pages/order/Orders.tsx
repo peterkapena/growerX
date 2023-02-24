@@ -1,4 +1,5 @@
 import { Chip, Typography } from "@mui/material";
+import PageLabel from "../../components/labels/PageLabel";
 import Order from "../../components/order/";
 import DataTable from "../../components/other/DataTable";
 import CustomTabs, { CustomTabPanelProps } from "../../components/Tab/Tabs";
@@ -95,45 +96,35 @@ const orders = [
 export default function Orders() {
   return (
     <div>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Orders
-      </Typography>
-      <CustomTabs tabs={tabs}></CustomTabs>
+      <PageLabel>Orders</PageLabel>
+      <DataTable
+        disableColumnMenu
+        rows={orders.map((order, index) => ({ id: index, ...order }))}
+        columns={[
+          {
+            field: "order",
+            headerName: "Order",
+            flex: 2,
+            renderCell: (params) => {
+              return <Order order={params.row}></Order>;
+            },
+          },
+          {
+            field: "status",
+            headerName: "Status",
+            renderCell: (params) => {
+              return (
+                <Chip
+                  variant="filled"
+                  color="info"
+                  size="medium"
+                  label={params.row.statuses[1].status}
+                />
+              );
+            },
+          },
+        ]}
+      ></DataTable>{" "}
     </div>
   );
 }
-
-const tabs: CustomTabPanelProps[] = statuses.map((status) => ({
-  label: status,
-  element: (
-    <DataTable
-      disableColumnMenu
-      rows={orders.map((order, index) => ({ id: index, ...order }))}
-      // SelectableRow={(_) => true}
-      columns={[
-        {
-          field: "order",
-          headerName: "Order",
-          flex: 2,
-          renderCell: (params) => {
-            return <Order order={params.row}></Order>;
-          },
-        },
-        {
-          field: "status",
-          headerName: "Status",
-          renderCell: (params) => {
-            return (
-              <Chip
-                variant="filled"
-                color="info"
-                size="medium"
-                label={params.row.statuses[1].status}
-              />
-            );
-          },
-        },
-      ]}
-    ></DataTable>
-  ),
-}));

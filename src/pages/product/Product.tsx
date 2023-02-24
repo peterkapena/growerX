@@ -19,6 +19,7 @@ import {
 import Loading from "../../components/other/Loading";
 import { MenuItem } from "@mui/material";
 import { AddProductSchemaInput } from "../../__generated__/graphql";
+import PageLabel from "../../components/labels/PageLabel";
 
 const GET_FLAGS_PRODUCTS_TYPE = gql(`
 query GetFlagsByType($input: Float!) {
@@ -88,9 +89,10 @@ export default function Product() {
   if (loading) return <Loading></Loading>;
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid width={500} container component="main" sx={{ height: "100vh" }}>
       <Grid item>
-        <Typography variant="h4">Add a product to your store</Typography>
+        
+        <PageLabel>Add a product to your store</PageLabel>
         <form id={formId} onSubmit={formik.handleSubmit}>
           <TextField
             label={formFields.flgProductType.label}
