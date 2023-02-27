@@ -14,6 +14,13 @@ export type Scalars = {
   Float: number;
 };
 
+export type AddOrUpdateFlag = {
+  _id?: InputMaybe<Scalars['String']>;
+  archived?: InputMaybe<Scalars['Boolean']>;
+  description: Scalars['String'];
+  flagTypeId: Scalars['Float'];
+};
+
 export type AddProductSchemaInput = {
   flgProductType: Scalars['String'];
   quantity: Scalars['Float'];
@@ -75,6 +82,20 @@ export type GetFlagByTypeAndDescription = {
   type: Scalars['Float'];
 };
 
+export type GetFlagSchema = {
+  __typename?: 'GetFlagSchema';
+  _id: Scalars['String'];
+  description: Scalars['String'];
+  flagType: Scalars['String'];
+  flagTypeId: Scalars['Float'];
+};
+
+export type GetFlagType = {
+  __typename?: 'GetFlagType';
+  id: Scalars['String'];
+  typeName: Scalars['String'];
+};
+
 export type GetOrganisationsSchema = {
   __typename?: 'GetOrganisationsSchema';
   _id: Scalars['String'];
@@ -128,6 +149,7 @@ export type GetProductsSchema = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addOrUpdateFlag: Scalars['Boolean'];
   addProduct: ProductSchema;
   createUser: UserSchema;
   editAddressDetails: Scalars['Boolean'];
@@ -138,6 +160,11 @@ export type Mutation = {
   signin: SigninOutput;
   toggleAdminApproved: Scalars['Boolean'];
   verifyToken: VerifyTokenSchema;
+};
+
+
+export type MutationAddOrUpdateFlagArgs = {
+  input: AddOrUpdateFlag;
 };
 
 
@@ -204,7 +231,9 @@ export type ProductSchema = {
 export type Query = {
   __typename?: 'Query';
   adminGetUsers: Array<AdminGetUsersSchema>;
+  getFlag?: Maybe<GetFlagSchema>;
   getFlagByTypeAndDescription: FlagSchema;
+  getFlagTypes: Array<GetFlagType>;
   getFlagsByType: Array<FlagSchema>;
   getOrganisations: Array<GetOrganisationsSchema>;
   getPerson: GetPersonSchema;
@@ -213,6 +242,11 @@ export type Query = {
   getProducts: Array<GetProductsSchema>;
   getProductsByOrganisation: Array<GetProductsSchema>;
   testQuery: Scalars['String'];
+};
+
+
+export type QueryGetFlagArgs = {
+  input: Scalars['String'];
 };
 
 

@@ -58,9 +58,10 @@ export default function Signin() {
 
     try {
       if (formik.isValid) {
+        if (IS_DEVELOPER) console.log(values);
         const input: SigninInput = {
-          password: values.password,
-          username: values.username,
+          password: values.password.trim(),
+          username: values.username.trim(),
         };
 
         const rtn = (await signin({ variables: { input } })).data?.signin;
