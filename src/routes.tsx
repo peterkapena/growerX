@@ -10,6 +10,7 @@ import Product from "./pages/product/Product";
 import Register from "./pages/other/Register";
 import Products from "./pages/other/Products";
 import ProductEdit from "./pages/product/ProductEdit";
+import ProductsPage from "./pages/product/ProductsPage copy";
 
 export const routes = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: PAGES.PRODUCTS,
-        element: <Products />,
+        element: <ProductsPage />,
       },
     ],
   },

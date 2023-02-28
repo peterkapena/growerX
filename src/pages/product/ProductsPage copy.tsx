@@ -5,7 +5,7 @@ import {
   ProductList,
   // ProductCartWidget,
   // ProductFilterSidebar,
-} from "../../sections/@dashboard/products";
+} from "../../components/product";
 import PRODUCTS from "../../_mock/products";
 
 export default function ProductsPage() {

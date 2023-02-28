@@ -1,7 +1,7 @@
 import { Box, Card, Link, Typography, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { fCurrency } from "../../../utils/formatNumber";
-import { ColorPreview } from "../../../components/color-utils";
+import { fCurrency } from "../../utils/formatNumber";
+import { ColorPreview } from "../../components/color-utils";
 
 const StyledProductImg = styled("img")({
   top: 0,
