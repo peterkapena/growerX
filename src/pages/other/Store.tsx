@@ -42,6 +42,7 @@ query GetProductsByOrganisation($input: String!) {
   getProductsByOrganisation(input: $input) {
     unitPrice
     quantity     
+    type
     organisationName
     name
     _id
@@ -51,9 +52,12 @@ query GetProductsByOrganisation($input: String!) {
 
 export default function Store() {
   const user = useUser();
-  const { data, loading } = useQuery(GetProductsByOrganisation, {
-    variables: { input: user.organisationId },
-  });
+  const { data, loading } = useQuery<GetProductsByOrganisationQuery>(
+    GetProductsByOrganisation,
+    {
+      variables: { input: user.organisationId },
+    }
+  );
 
   const navigate = useNavigate();
 

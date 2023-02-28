@@ -22,6 +22,8 @@ import { EditProduct } from "../../pages/product/ProductEditForm";
 import { AddProductSchemaInput } from "../../__generated__/graphql";
 import { GetProducts } from "../../pages/product/Products";
 import { GetProductsByOrganisation } from "../../pages/other/Store";
+import { useNavigate } from "react-router-dom";
+import { PAGES } from "../../common";
 
 const StyledProductImg = styled("img")({
   top: 0,
@@ -56,6 +58,7 @@ mutation ToggleArchived($archived: Boolean!, $id: String!) {
 export default function ProductCard({ product, deletable }: ProductType) {
   const [showDelete, setShowDelete] = useState(false);
   const { name, unitPrice, organisationName, id, quantity } = product;
+  const navigate = useNavigate();
 
   const [toggleArchived] = useMutation(ToggleArchived, {
     refetchQueries: [GetProducts, GetProductsByOrganisation],
@@ -73,11 +76,12 @@ export default function ProductCard({ product, deletable }: ProductType) {
         <StyledProductImg alt={name} src={cover} />
       </Box> */}
       <Button
+        onClick={() => navigate(PAGES.PRODUCT + "/" + id)}
         variant="contained"
         sx={{ m: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
         fullWidth
       >
-        <Typography variant="subtitle2" noWrap>
+        <Typography variant="subtitle1" noWrap>
           {name}
         </Typography>
       </Button>
@@ -89,7 +93,9 @@ export default function ProductCard({ product, deletable }: ProductType) {
             </Typography>
           </Button>
         )}
-
+        <Typography component={Button} variant="caption" noWrap>
+          {quantity} Available in store
+        </Typography>
         <Stack
           direction="row"
           alignItems="center"
