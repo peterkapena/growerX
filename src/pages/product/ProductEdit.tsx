@@ -17,6 +17,7 @@ query GetFlagsByType($input: Float!) {
     }
   }
 `);
+
 const GetProduct = gql(`
 query GetProduct($input: String!) {
   getProduct(input: $input) {
@@ -46,5 +47,3 @@ export default function ProductEdit() {
     </>
   );
 }
-
-

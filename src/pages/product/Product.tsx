@@ -55,7 +55,7 @@ export default function Product() {
     variables: { input: 3 },
   });
   const [addProduct] = useMutation(ADD_PRODUCT, {
-    refetchQueries: ["GetProductsByOrganisation"],
+    refetchQueries: ["GetProductsByOrganisation", "GetProducts"],
   });
   const navigate = useNavigate();
 

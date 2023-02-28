@@ -13,14 +13,16 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\nmutation ToggleArchived($archived: Boolean!, $toggleArchivedId: String!) {\n  toggleArchived(archived: $archived, id: $toggleArchivedId)\n}\n": types.ToggleArchivedDocument,
     "\nquery GetFlagsByType($input: Float!) {\n    getFlagsByType(input: $input) {\n      description\n      _id\n    }\n  }\n": types.GetFlagsByTypeDocument,
     "\nmutation VerifyToken($input: String!) {\n  verifyToken(input: $input) {\n    username\n    token\n    email\n    surName\n    givenName\n    isValid\n    organisationId\n  }\n}": types.VerifyTokenDocument,
     "\nmutation Register($input: RegisterSchemaInput!) {\n  register(input: $input) {\n    person {\n      surName\n      givenName\n    }\n    organisation {\n      name\n    }\n  }\n}\n": types.RegisterDocument,
     "\nmutation Signin($input: SigninInput!) {\n  signin(input: $input) {\n    username\n    token\n    email\n    surName\n    givenName\n    message\n  }\n}\n": types.SigninDocument,
-    "\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    name\n    _id\n  }\n}\n": types.GetProductsByOrganisationDocument,
+    "\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    organisationName\n    name\n    _id\n  }\n}\n": types.GetProductsByOrganisationDocument,
     "\nmutation AddProduct($input: AddProductSchemaInput!) {\n    addProduct(input: $input) {\n      quantity\n      organisationId\n      flgProductType\n      _id\n    }\n  }\n": types.AddProductDocument,
     "\nquery GetProduct($input: String!) {\n  getProduct(input: $input) {\n    _id\n    quantity\n    type\n    name\n    unitPrice\n  }\n}\n": types.GetProductDocument,
     "\nmutation EditProduct($input: AddProductSchemaInput!, $id: String!) {\n  editProduct(input: $input, id: $id)\n}\n": types.EditProductDocument,
+    "\nquery GetProducts {\n  getProducts {\n    unitPrice\n    type\n    quantity\n    organisationName\n    name\n    _id\n  }\n}\n\n  ": types.GetProductsDocument,
 };
 
 /**
@@ -40,6 +42,10 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\nmutation ToggleArchived($archived: Boolean!, $toggleArchivedId: String!) {\n  toggleArchived(archived: $archived, id: $toggleArchivedId)\n}\n"): (typeof documents)["\nmutation ToggleArchived($archived: Boolean!, $toggleArchivedId: String!) {\n  toggleArchived(archived: $archived, id: $toggleArchivedId)\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\nquery GetFlagsByType($input: Float!) {\n    getFlagsByType(input: $input) {\n      description\n      _id\n    }\n  }\n"): (typeof documents)["\nquery GetFlagsByType($input: Float!) {\n    getFlagsByType(input: $input) {\n      description\n      _id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -56,7 +62,7 @@ export function gql(source: "\nmutation Signin($input: SigninInput!) {\n  signin
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    name\n    _id\n  }\n}\n"): (typeof documents)["\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    name\n    _id\n  }\n}\n"];
+export function gql(source: "\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    organisationName\n    name\n    _id\n  }\n}\n"): (typeof documents)["\nquery GetProductsByOrganisation($input: String!) {\n  getProductsByOrganisation(input: $input) {\n    unitPrice\n    quantity     \n    organisationName\n    name\n    _id\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -69,6 +75,10 @@ export function gql(source: "\nquery GetProduct($input: String!) {\n  getProduct
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nmutation EditProduct($input: AddProductSchemaInput!, $id: String!) {\n  editProduct(input: $input, id: $id)\n}\n"): (typeof documents)["\nmutation EditProduct($input: AddProductSchemaInput!, $id: String!) {\n  editProduct(input: $input, id: $id)\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery GetProducts {\n  getProducts {\n    unitPrice\n    type\n    quantity\n    organisationName\n    name\n    _id\n  }\n}\n\n  "): (typeof documents)["\nquery GetProducts {\n  getProducts {\n    unitPrice\n    type\n    quantity\n    organisationName\n    name\n    _id\n  }\n}\n\n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

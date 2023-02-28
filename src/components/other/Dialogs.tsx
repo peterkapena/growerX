@@ -34,6 +34,11 @@ export function AlertDialog(props: AlertDialogProps) {
     setOpen(false);
   };
 
+  const confirmed = () => {
+    if (onConfirm) onConfirm();
+    handleClose();
+  };
+
   return (
     <div>
       <Dialog
@@ -51,8 +56,13 @@ export function AlertDialog(props: AlertDialogProps) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Ok</Button>
-          {onConfirm && <Button onClick={onConfirm}>Yes</Button>}
+          {!onConfirm && <Button onClick={handleClose}>Ok</Button>}
+          {onConfirm && (
+            <>
+              <Button onClick={handleClose}>No</Button>
+              <Button onClick={confirmed}>Yes</Button>
+            </>
+          )}
         </DialogActions>
       </Dialog>
     </div>

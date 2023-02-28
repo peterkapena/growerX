@@ -10,7 +10,7 @@ import Product from "./pages/product/Product";
 import Register from "./pages/other/Register";
 import Products from "./pages/other/Products";
 import ProductEdit from "./pages/product/ProductEdit";
-import ProductsPage from "./pages/product/ProductsPage copy";
+import ProductsPage from "./pages/product/Products";
 
 export const routes = createBrowserRouter([
   {

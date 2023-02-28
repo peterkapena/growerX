@@ -27,7 +27,7 @@ type ProductEdit1Props = {
   data: GetProductsSchema;
 };
 
-const EditProduct = gql(`
+export const EditProduct = gql(`
 mutation EditProduct($input: AddProductSchemaInput!, $id: String!) {
   editProduct(input: $input, id: $id)
 }

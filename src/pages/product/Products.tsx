@@ -1,14 +1,33 @@
 // import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import { Typography } from "@mui/material";
+import Loading from "../../components/other/Loading";
 import {
   // ProductSort,
   ProductList,
   // ProductCartWidget,
   // ProductFilterSidebar,
 } from "../../components/product";
-import PRODUCTS from "../../_mock/products";
+import { ProductProps } from "../../components/product/ProductCard";
+// import PRODUCTS from "../../_mock/products";
+import { gql } from "../../__generated__";
 
+export const GetProducts = gql(`
+query GetProducts {
+  getProducts {
+    unitPrice
+    type
+    quantity
+    organisationName
+    name
+    _id
+  }
+}
+
+  `);
 export default function ProductsPage() {
+  const { data, loading } = useQuery(GetProducts);
+
   // const [openFilter, setOpenFilter] = useState(false);
 
   // const handleOpenFilter = () => {
@@ -19,10 +38,20 @@ export default function ProductsPage() {
   //   setOpenFilter(false);
   // };
 
+  if (loading) return <Loading></Loading>;
+
+  const PRODUCTS: ProductProps[] | undefined = data?.getProducts.map((p) => ({
+    id: p._id,
+    name: p.name,
+    unitPrice: p.unitPrice,
+    organisationName: p.organisationName,
+    quantity: p.quantity,
+  }));
+
   return (
     <>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Products
+        Products in the market
       </Typography>
 
       {/* <Stack
@@ -42,7 +71,7 @@ export default function ProductsPage() {
         </Stack>
       </Stack> */}
 
-      <ProductList products={PRODUCTS} />
+      {PRODUCTS && <ProductList deletable={false} products={PRODUCTS} />}
       {/* <ProductCartWidget /> */}
     </>
   );
