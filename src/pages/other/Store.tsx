@@ -46,6 +46,7 @@ query GetProductsByOrganisation($input: String!) {
     organisationName
     name
     _id
+    organisationId
   }
 }
 `);
@@ -70,6 +71,7 @@ export default function Store() {
       unitPrice: p.unitPrice,
       organisationName: p.organisationName,
       quantity: p.quantity,
+      organisationId: p.organisationId,
     }));
 
   return (

@@ -1,130 +1,85 @@
+import { useQuery } from "@apollo/client";
 import { Chip, Typography } from "@mui/material";
+import { GridActionsCellItem, GridColDef, GridColumns } from "@mui/x-data-grid";
 import PageLabel from "../../components/labels/PageLabel";
 import Order from "../../components/order/";
 import DataTable from "../../components/other/DataTable";
+import Loading from "../../components/other/Loading";
 import CustomTabs, { CustomTabPanelProps } from "../../components/Tab/Tabs";
+import { gql } from "../../__generated__";
+import { GetOrdersQuery } from "../../__generated__/graphql";
+import AddIcon from "@mui/icons-material/Add";
+import { OrderProps } from "../../components/order/OrderCard";
+import OrderList from "../../components/order/OrderList";
 
-const statuses = ["Requested", "Completed", "Cancelled"];
-
-const orders = [
-  {
-    date: "01/02/2023",
-    product: "Maize",
-    quantity: "100",
-    statuses: [
-      {
-        date: "01/02/2023",
-        status: statuses[0],
-      },
-      {
-        date: "01/02/2023",
-        status: statuses[2],
-      },
-    ],
-    customer: {
-      organisation: "Grower",
-      fullName: "Farmer 1",
-      cellNumber: "0812174767",
-      address: "1234 Main St",
-    },
-  },
-  {
-    date: "03/02/2023",
-    product: "Beans",
-    quantity: "10",
-    statuses: [
-      {
-        date: "03/02/2023",
-        status: statuses[0],
-      },
-      {
-        date: "04/02/2023",
-        status: statuses[1],
-      },
-    ],
-    customer: {
-      organisation: "Grower 2",
-      fullName: "Farmer 2",
-      cellNumber: "0812174767",
-      address: "1234 Old street",
-    },
-  },
-  {
-    date: "05/02/2023",
-    product: "Peanuts",
-    quantity: "40",
-    statuses: [
-      {
-        date: "05/02/2023",
-        status: statuses[0],
-      },
-      {
-        date: "05/02/2023",
-        status: statuses[2],
-      },
-    ],
-    customer: {
-      organisation: "Grower",
-      fullName: "Farmer 3",
-      cellNumber: "0812174767",
-      address: "1234 New street",
-    },
-  },
-  {
-    date: "01/02/2023",
-    product: "Spinach",
-    quantity: "34",
-    statuses: [
-      {
-        date: "01/02/2023",
-        status: statuses[0],
-      },
-      {
-        date: "01/02/2023",
-        status: statuses[2],
-      },
-    ],
-    customer: {
-      organisation: "Grower",
-      fullName: "Farmer 4",
-      cellNumber: "0812174767",
-      address: "1234 Big Green",
-    },
-  },
-];
+export const GetOrders = gql(`
+query GetOrders {
+  getOrders {
+    submittedBy
+    productName
+    flgStatus
+    dateSubmitted
+    _id
+    quantity
+    unitPrice
+  }
+}
+`);
 
 export default function Orders() {
+  const getOrdersQuery = useQuery(GetOrders);
+
+  if (getOrdersQuery.loading) return <Loading></Loading>;
+
+  const ORDERS: OrderProps[] | undefined = getOrdersQuery.data?.getOrders.map(
+    (o) => ({
+      dateSubmitted: o.dateSubmitted,
+      flgStatus: o.flgStatus,
+      productName: o.productName,
+      submittedBy: o.submittedBy,
+      id: o._id,
+      quantity: o.quantity,
+      unitPrice: o.unitPrice,
+    })
+  );
   return (
     <div>
       <PageLabel>Orders</PageLabel>
-      <DataTable
+      {ORDERS && <OrderList orders={ORDERS} />}
+      {/* <DataTable
         disableColumnMenu
-        rows={orders.map((order, index) => ({ id: index, ...order }))}
-        columns={[
-          {
-            field: "order",
-            headerName: "Order",
-            flex: 2,
-            renderCell: (params) => {
-              return <Order order={params.row}></Order>;
-            },
-          },
-          {
-            field: "status",
-            headerName: "Status",
-            renderCell: (params) => {
-              return (
-                <Chip
-                  variant="filled"
-                  color="info"
-                  size="medium"
-                  label={params.row.statuses[1].status}
-                />
-              );
-            },
-          },
-        ]}
-      ></DataTable>{" "}
+        rows={rows(getOrdersQuery.data)}
+        columns={columns}
+      ></DataTable> */}
     </div>
   );
 }
+
+// const columns: GridColumns<OrderProps> = [
+//   {
+//     field: "productName",
+//     headerName: "Product ",
+//   },
+//   {
+//     field: "flgStatus",
+//     headerName: "Status",
+//   },
+//   {
+//     field: "submittedBy",
+//     headerName: "By",
+//   },
+// ];
+
+// function rows(data: GetOrdersQuery | undefined): OrderProps[] {
+//   if (!data) return [];
+
+//   const { getOrders } = data;
+
+//   return getOrders.map((o) => ({
+//     dateSubmitted: o.dateSubmitted,
+//     flgStatus: o.flgStatus,
+//     productName: o.productName,
+//     submittedBy: o.submittedBy,
+//     id: o._id,
+//   }));
+// }

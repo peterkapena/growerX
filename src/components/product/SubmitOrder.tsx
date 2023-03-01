@@ -22,9 +22,10 @@ mutation AddOrUpdateOrder($input: AddOrUpdateOrder!) {
 
 type SubmitOrderProps = {
   productId: string;
+  organisationId: string;
 };
 export default function SubmitOrder(props: SubmitOrderProps) {
-  const { productId } = props;
+  const { productId, organisationId } = props;
   const { formFields, formId } = submitOrderFormModel;
   const [error, setError] = useState(false);
   const [ok, setOk] = useState(false);
@@ -74,6 +75,7 @@ export default function SubmitOrder(props: SubmitOrderProps) {
           type="number"
           margin="normal"
           fullWidth
+          disabled={user.organisationId === organisationId}
           sx={{ p: 0, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
           {...formik.getFieldProps(formFields.quantity.name)}
           InputProps={{

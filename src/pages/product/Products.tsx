@@ -21,6 +21,7 @@ query GetProducts {
     organisationName
     name
     _id
+    organisationId
   }
 }
 
@@ -46,6 +47,7 @@ export default function ProductsPage() {
     unitPrice: p.unitPrice,
     organisationName: p.organisationName,
     quantity: p.quantity,
+    organisationId: p.organisationId,
   }));
 
   return (

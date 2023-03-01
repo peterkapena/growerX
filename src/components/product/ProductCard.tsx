@@ -45,30 +45,33 @@ export type ProductProps = {
   // cover: string;
   unitPrice: number;
   organisationName: string;
+  organisationId: string;
   quantity: number;
   // colors: string[];
   // status: string | undefined;
   // priceSale: number | null;
 };
 
-const ToggleArchived = gql(`
-mutation ToggleArchived($archived: Boolean!, $id: String!) {
-  toggleArchived(archived: $archived, id: $id)
+const ToggleProductArchived = gql(`
+mutation ToggleProductArchived($archived: Boolean!, $toggleProductArchivedId: String!) {
+  toggleProductArchived(archived: $archived, id: $toggleProductArchivedId)
 }
 `);
+
 export default function ProductCard({ product, deletable }: ProductType) {
   const [showDelete, setShowDelete] = useState(false);
   const [buying, setBuying] = useState(false);
-  const { name, unitPrice, organisationName, id, quantity } = product;
+  const { name, unitPrice, organisationName, id, quantity, organisationId } =
+    product;
   const navigate = useNavigate();
 
-  const [toggleArchived] = useMutation(ToggleArchived, {
+  const [toggleArchived] = useMutation(ToggleProductArchived, {
     refetchQueries: [GetProducts, GetProductsByOrganisation],
   });
 
   async function deleProduct() {
     await toggleArchived({
-      variables: { archived: true, id: id },
+      variables: { archived: true, toggleProductArchivedId: id },
     });
   }
 
@@ -131,16 +134,10 @@ export default function ProductCard({ product, deletable }: ProductType) {
             startIcon={<DeleteIcon />}
           ></Button>
         ) : (
-          <SubmitOrder productId={id}></SubmitOrder>
-          // <Button
-          //   color="secondary"
-          //   variant="contained"
-          //   sx={{ m: 0, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
-          //   fullWidth
-          //   startIcon={<AddShoppingCartIcon />}
-          // >
-          //   Buy
-          // </Button>
+          <SubmitOrder
+            productId={id}
+            organisationId={organisationId}
+          ></SubmitOrder>
         )}
       </CardActions>
       {showDelete && (
