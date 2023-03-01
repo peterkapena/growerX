@@ -1,10 +1,6 @@
-import { Chip, Typography } from "@mui/material";
 import PageLabel from "../../components/labels/PageLabel";
-import Order from "../../components/order/";
 import DataTable from "../../components/other/DataTable";
-import CustomTabs, { CustomTabPanelProps } from "../../components/Tab/Tabs";
 
-const statuses = ["Requested", "Completed", "Cancelled"];
 
 const orders = [
   {

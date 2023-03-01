@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import { FormikHelpers, useFormik } from "formik";
 import { IS_DEVELOPER, PAGES } from "../../common";
 import { gql, useMutation, useQuery } from "@apollo/client";

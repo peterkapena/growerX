@@ -24,7 +24,6 @@ import {
 import PageLabel from "../../components/labels/PageLabel";
 import { GetProductsByOrganisation } from "../other/Store";
 import { useUser } from "../../redux/userSlice";
-import { Console } from "console";
 
 const GET_FLAGS_PRODUCTS_TYPE = gql(`
 query GetFlagsByType($input: Float!) {

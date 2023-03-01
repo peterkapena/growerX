@@ -105,6 +105,12 @@ export default function SubmitOrder(props: SubmitOrderProps) {
           onClose={() => setOk(false)}
         ></AlertDialog>
       )}
+      {error && (
+        <AlertDialog
+          message="An error has occurred"
+          onClose={() => setError(false)}
+        ></AlertDialog>
+      )}
     </>
   );
 }

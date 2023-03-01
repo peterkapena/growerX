@@ -1,38 +1,21 @@
 import {
-  Box,
   Card,
-  Link,
   Typography,
   Stack,
-  Avatar,
   CardActions,
-  IconButton,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { fCurrency } from "../../utils/formatNumber";
-import { ColorPreview } from "../../components/color-utils";
 import DeleteIcon from "@mui/icons-material/Delete";
 import StoreIcon from "@mui/icons-material/Store";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { AlertDialog } from "../other/Dialogs";
 import { gql, useMutation } from "@apollo/client";
-import { EditProduct } from "../../pages/product/ProductEditForm";
-import { AddProductSchemaInput } from "../../__generated__/graphql";
 import { GetProducts } from "../../pages/product/Products";
 import { GetProductsByOrganisation } from "../../pages/other/Store";
 import { useNavigate } from "react-router-dom";
 import { PAGES } from "../../common";
 import SubmitOrder from "./SubmitOrder";
-
-const StyledProductImg = styled("img")({
-  top: 0,
-  width: "100%",
-  height: "40%",
-  objectFit: "cover",
-  position: "absolute",
-});
 
 type ProductType = {
   product: ProductProps;
@@ -60,7 +43,6 @@ mutation ToggleProductArchived($archived: Boolean!, $toggleProductArchivedId: St
 
 export default function ProductCard({ product, deletable }: ProductType) {
   const [showDelete, setShowDelete] = useState(false);
-  const [buying, setBuying] = useState(false);
   const { name, unitPrice, organisationName, id, quantity, organisationId } =
     product;
   const navigate = useNavigate();

@@ -1,14 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { Chip, Typography } from "@mui/material";
-import { GridActionsCellItem, GridColDef, GridColumns } from "@mui/x-data-grid";
 import PageLabel from "../../components/labels/PageLabel";
-import Order from "../../components/order/";
-import DataTable from "../../components/other/DataTable";
 import Loading from "../../components/other/Loading";
-import CustomTabs, { CustomTabPanelProps } from "../../components/Tab/Tabs";
 import { gql } from "../../__generated__";
-import { GetOrdersQuery } from "../../__generated__/graphql";
-import AddIcon from "@mui/icons-material/Add";
 import { OrderProps } from "../../components/order/OrderCard";
 import OrderList from "../../components/order/OrderList";
 

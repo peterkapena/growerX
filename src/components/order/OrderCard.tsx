@@ -1,29 +1,16 @@
-import { styled } from "@mui/material/styles";
-import Box, { BoxProps } from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
   Card,
-  Button,
-  Stack,
   CardActions,
   ListItemText,
-  Alert,
   ListItem,
-  ListItemIcon,
   Chip,
   IconButton,
 } from "@mui/material";
-import { id } from "date-fns/locale";
-import { PAGES } from "../../common";
 import { fCurrency } from "../../utils/formatNumber";
 import { AlertDialog } from "../other/Dialogs";
-import SubmitOrder from "../product/SubmitOrder";
-import { useNavigate } from "react-router-dom";
-import StoreIcon from "@mui/icons-material/Store";
-import { title } from "process";
 import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import PersonIcon from "@mui/icons-material/Person";
 import Delete from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
@@ -43,9 +30,6 @@ export type OrderType = {
   order: OrderProps;
 };
 
-const StyledOrder = styled(Box)({
-  cursor: "pointer",
-});
 
 const ToggleOrderArchived = gql(`
 mutation ToggleOrderArchived($archived: Boolean!, $toggleOrderArchivedId: String!) {
@@ -61,9 +45,8 @@ export default function OrderCard(props: OrderType) {
     submittedBy,
     quantity,
     unitPrice,
-    id
+    id,
   } = props.order;
-  const navigate = useNavigate();
   const [showDelete, setShowDelete] = useState(false);
 
   const [toggleArchived] = useMutation(ToggleOrderArchived, {

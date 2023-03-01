@@ -2,13 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
 } from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
-import DataTable from "../../components/other/DataTable";
 import Loading from "../../components/other/Loading";
 import { useUser } from "../../redux/userSlice";
 import { GetProductsByOrganisationQuery } from "../../__generated__/graphql";
@@ -19,23 +13,6 @@ import PageLabel from "../../components/labels/PageLabel";
 import { ProductProps } from "../../components/product/ProductCard";
 import { ProductList } from "../../components/product";
 
-const columns: GridColDef[] = [
-  {
-    field: "name",
-    headerName: "Product",
-    renderCell: (params: any) => {
-      return <Typography variant="subtitle1">{params.row.name}</Typography>;
-    },
-  },
-  {
-    field: "quantity",
-    headerName: "Quantity",
-  },
-  {
-    field: "unitPrice",
-    headerName: "Unit price",
-  },
-];
 
 export const GetProductsByOrganisation = gql(`
 query GetProductsByOrganisation($input: String!) {
@@ -110,24 +87,5 @@ export default function Store() {
   );
 }
 
-type StorePropType = {
-  id: string;
-  quantity: number;
-  name: string;
-  unitPrice: number;
-};
 
-function rows(
-  data: GetProductsByOrganisationQuery | undefined
-): StorePropType[] {
-  if (!data) return [];
 
-  const { getProductsByOrganisation } = data;
-
-  return getProductsByOrganisation.map((u) => ({
-    id: u._id,
-    quantity: u.quantity,
-    name: u.name,
-    unitPrice: u.unitPrice,
-  }));
-}

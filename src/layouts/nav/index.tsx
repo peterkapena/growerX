@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
-import { Box, Link, Drawer, Typography, Avatar } from "@mui/material";
+import { Box, Drawer, Typography, Avatar } from "@mui/material";
 import useResponsive from "../../hooks/useResponsive";
 import Logo from "../../components/logo";
 import Scrollbar from "../../components/scrollbar";

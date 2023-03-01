@@ -1,9 +1,5 @@
-import PropTypes from "prop-types";
-// @mui
 import { Grid } from "@mui/material";
 import ProductCard, { ProductProps } from "./ProductCard";
-
-// ----------------------------------------------------------------------
 
 type ProductListProps = {
   products: ProductProps[];
