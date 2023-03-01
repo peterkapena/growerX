@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\nmutation ToggleArchived($archived: Boolean!, $id: String!) {\n  toggleArchived(archived: $archived, id: $id)\n}\n": types.ToggleArchivedDocument,
+    "\nmutation AddOrUpdateOrder($input: AddOrUpdateOrder!) {\n  addOrUpdateOrder(input: $input)\n}\n": types.AddOrUpdateOrderDocument,
     "\nquery GetFlagsByType($input: Float!) {\n    getFlagsByType(input: $input) {\n      description\n      _id\n    }\n  }\n": types.GetFlagsByTypeDocument,
     "\nmutation VerifyToken($input: String!) {\n  verifyToken(input: $input) {\n    username\n    token\n    email\n    surName\n    givenName\n    isValid\n    organisationId\n  }\n}": types.VerifyTokenDocument,
     "\nmutation Register($input: RegisterSchemaInput!) {\n  register(input: $input) {\n    person {\n      surName\n      givenName\n    }\n    organisation {\n      name\n    }\n  }\n}\n": types.RegisterDocument,
@@ -43,6 +44,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nmutation ToggleArchived($archived: Boolean!, $id: String!) {\n  toggleArchived(archived: $archived, id: $id)\n}\n"): (typeof documents)["\nmutation ToggleArchived($archived: Boolean!, $id: String!) {\n  toggleArchived(archived: $archived, id: $id)\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation AddOrUpdateOrder($input: AddOrUpdateOrder!) {\n  addOrUpdateOrder(input: $input)\n}\n"): (typeof documents)["\nmutation AddOrUpdateOrder($input: AddOrUpdateOrder!) {\n  addOrUpdateOrder(input: $input)\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -24,6 +24,7 @@ import { GetProducts } from "../../pages/product/Products";
 import { GetProductsByOrganisation } from "../../pages/other/Store";
 import { useNavigate } from "react-router-dom";
 import { PAGES } from "../../common";
+import SubmitOrder from "./SubmitOrder";
 
 const StyledProductImg = styled("img")({
   top: 0,
@@ -57,6 +58,7 @@ mutation ToggleArchived($archived: Boolean!, $id: String!) {
 `);
 export default function ProductCard({ product, deletable }: ProductType) {
   const [showDelete, setShowDelete] = useState(false);
+  const [buying, setBuying] = useState(false);
   const { name, unitPrice, organisationName, id, quantity } = product;
   const navigate = useNavigate();
 
@@ -119,18 +121,7 @@ export default function ProductCard({ product, deletable }: ProductType) {
         </Stack>
       </Stack>
       <CardActions sx={{ p: 0 }} disableSpacing>
-        {!deletable && (
-          <Button
-            color="secondary"
-            variant="contained"
-            sx={{ m: 0, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
-            fullWidth
-            startIcon={<AddShoppingCartIcon />}
-          >
-            Buy
-          </Button>
-        )}
-        {deletable && (
+        {deletable ? (
           <Button
             color="error"
             variant="contained"
@@ -139,6 +130,17 @@ export default function ProductCard({ product, deletable }: ProductType) {
             onClick={() => setShowDelete(true)}
             startIcon={<DeleteIcon />}
           ></Button>
+        ) : (
+          <SubmitOrder productId={id}></SubmitOrder>
+          // <Button
+          //   color="secondary"
+          //   variant="contained"
+          //   sx={{ m: 0, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+          //   fullWidth
+          //   startIcon={<AddShoppingCartIcon />}
+          // >
+          //   Buy
+          // </Button>
         )}
       </CardActions>
       {showDelete && (
