@@ -1,4 +1,5 @@
 Add authorization to web service resolvers
+Add organisation name on the user popover
 add price sale to product model
 Auditing of everything in the application
 Implement the search 

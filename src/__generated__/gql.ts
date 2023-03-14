@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\nmutation ToggleOrderArchived($archived: Boolean!, $toggleOrderArchivedId: String!) {\n  toggleOrderArchived(archived: $archived, id: $toggleOrderArchivedId)\n}\n": types.ToggleOrderArchivedDocument,
     "\nmutation ToggleProductArchived($archived: Boolean!, $toggleProductArchivedId: String!) {\n  toggleProductArchived(archived: $archived, id: $toggleProductArchivedId)\n}\n": types.ToggleProductArchivedDocument,
     "\nmutation AddOrUpdateOrder($input: AddOrUpdateOrder!) {\n  addOrUpdateOrder(input: $input)\n}\n": types.AddOrUpdateOrderDocument,
     "\nquery GetFlagsByType($input: Float!) {\n    getFlagsByType(input: $input) {\n      description\n      _id\n    }\n  }\n": types.GetFlagsByTypeDocument,
@@ -41,6 +42,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation ToggleOrderArchived($archived: Boolean!, $toggleOrderArchivedId: String!) {\n  toggleOrderArchived(archived: $archived, id: $toggleOrderArchivedId)\n}\n"): (typeof documents)["\nmutation ToggleOrderArchived($archived: Boolean!, $toggleOrderArchivedId: String!) {\n  toggleOrderArchived(archived: $archived, id: $toggleOrderArchivedId)\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
