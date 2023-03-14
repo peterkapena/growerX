@@ -432,6 +432,7 @@ export type VerifyTokenSchema = {
   givenName?: Maybe<Scalars['String']>;
   isValid: Scalars['Boolean'];
   organisationId: Scalars['String'];
+  organisationName: Scalars['String'];
   surName?: Maybe<Scalars['String']>;
   token: Scalars['String'];
   username?: Maybe<Scalars['String']>;
